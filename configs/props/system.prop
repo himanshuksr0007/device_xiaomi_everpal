@@ -1,2 +1,47 @@
 # Device specific properties
 import /system/etc/props/${ro.boot.board_id}.prop
+
+# Optimize Android Framework compilation for 6GB RAM
+dalvik.vm.systemservercompilerfilter=speed-profile
+
+# Disable statsd telemetry daemon
+ro.statsd.enable=false
+
+# Disable StrictMode logging overhead
+persist.sys.strictmode.disable=true
+
+# Disable profiler error reporting
+profiler.force_disable_err_rpt=1
+profiler.force_disable_ulog=1
+
+# Disable HWUI frame profiling (effective in userdebug builds)
+debug.hwui.profile=false
+
+# ============================================================
+# Dalvik/ART Heap — tuned for 6GB RAM
+# ============================================================
+dalvik.vm.heapstartsize=16m
+dalvik.vm.heapgrowthlimit=256m
+dalvik.vm.heapsize=512m
+dalvik.vm.heaptargetutilization=0.75
+dalvik.vm.heapminfree=512k
+dalvik.vm.heapmaxfree=8m
+
+# ============================================================
+# ART Dexopt filters
+# ============================================================
+pm.dexopt.install=speed-profile
+pm.dexopt.bg-dexopt=speed-profile
+pm.dexopt.boot=verify
+pm.dexopt.first-boot=verify
+pm.dexopt.shared=speed
+
+# ============================================================
+# dex2oat stability — prevents watchdog kill on large apps
+# ============================================================
+dalvik.vm.dex2oat-flags=--no-watch-dog
+
+# ============================================================
+# Predictive Back Gesture (Android 13+ / 16)
+# ============================================================
+persist.wm.debug.predictive_back=1
