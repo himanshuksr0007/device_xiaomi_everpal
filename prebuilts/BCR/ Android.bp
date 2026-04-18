@@ -1,0 +1,11 @@
+android_app_import {
+    name: "BCR",
+    apk: "app-release.apk",
+    privileged: true,
+    presigned: true,
+    preprocessed: true,
+    optional_uses_libs: [
+        "androidx.window.extensions",
+        "androidx.window.sidecar",
+    ],
+}
