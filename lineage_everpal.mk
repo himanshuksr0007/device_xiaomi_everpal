@@ -10,6 +10,14 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from device makefile.
 $(call inherit-product, device/xiaomi/everpal/device.mk)
 
+# Dolby Audio
+# Set to false to disable Dolby Audio support at build time
+INCLUDE_DOLBY_AUDIO := true
+
+# BCR
+# Set to false to disable BCR support at build time
+WITH_GOKU_BCR := true
+
 # Inherit some common Lineage stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 

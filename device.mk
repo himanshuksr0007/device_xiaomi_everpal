@@ -19,7 +19,9 @@ $(call inherit-product, vendor/mediatek/ims/ims.mk)
 $(call inherit-product, vendor/xiaomi/everpal/everpal-vendor.mk)
 
 # Dolby
+ifeq ($(INCLUDE_DOLBY_AUDIO),true)
 $(call inherit-product, hardware/dolby/dolby.mk)
+endif
 
 # A/B
 PRODUCT_PACKAGES += \
