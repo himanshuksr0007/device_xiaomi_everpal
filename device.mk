@@ -353,8 +353,12 @@ PRODUCT_COPY_FILES += \
     $(call find-copy-subdir-files,*,$(LOCAL_PATH)/configs/wifi/,$(TARGET_COPY_OUT_VENDOR)/etc/wifi)
 
 # BCR (Basic Call Recorder)
+# Set WITH_GOKU_BCR := false to exclude BCR from the build
+WITH_GOKU_BCR ?= true
+ifeq ($(WITH_GOKU_BCR),true)
 PRODUCT_PACKAGES += \
     BCR
-    
+
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/permissions/privapp-permissions-BCR.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-BCR.xml
+endif
