@@ -66,6 +66,15 @@
                 <library name="sia81xx_sixth"/>
             </downlink_library_name_list>
         </aurisys_scenario>
+        <!-- Voice Call recording scenario for BCR / AUDIO_SOURCE_VOICE_CALL -->
+        <aurisys_scenario aurisys_scenario="AURISYS_SCENARIO_CALL_FINAL">
+            <uplink_library_name_list digital_gain_lib_name="mtk_speech_enh">
+                <library name="mtk_speech_enh"/>
+            </uplink_library_name_list>
+            <downlink_library_name_list digital_gain_lib_name="mtk_speech_enh">
+                <library name="mtk_speech_enh"/>
+            </downlink_library_name_list>
+        </aurisys_scenario>
     </aurisys_scenarios>
     <!--
      * =========================================================================
