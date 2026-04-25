@@ -3,6 +3,9 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+# MIUI Camera
+$(call inherit-product-if-exists, vendor/xiaomi/camera/miuicamera.mk)
+
 # Dalvik VM Configuration
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
@@ -363,4 +366,67 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/permissions/privapp-permissions-BCR.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-BCR.xml
+<<<<<<< HEAD
 endif
+=======
+endif
+
+# InstallerX - Replaces AOSP PackageInstaller
+# Controlled by WITH_INSTALLER_X flag in lineage_everpal.mk
+ifeq ($(WITH_INSTALLER_X),true)
+
+PRODUCT_PACKAGES += \
+    InstallerX
+
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/configs/permissions/privapp-permissions-InstallerX.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-InstallerX.xml
+
+# Remove stock AOSP PackageInstaller
+PRODUCT_PACKAGES_OVERRIDES += \
+    PackageInstaller
+
+endif
+
+# Camera - camerahalserver with torch strength control
+# Implements ICameraDevice wrapper that injects torch characteristics and
+# routes turnOnTorchWithStrengthLevel() to the mt6360 sysfs node.
+PRODUCT_SOONG_NAMESPACES += \
+    $(LOCAL_PATH)/camera
+
+PRODUCT_PACKAGES += \
+    camerahalserver \
+    android.hardware.camera.device-torch-strength
+
+# Override prebuilt camerahalserver from vendor
+PRODUCT_PACKAGES_OVERRIDES += \
+    camerahalserver
+
+# ============================================================
+# 90Hz Panel — SurfaceFlinger Scheduler Tuning
+# ============================================================
+# Dynamic refresh rate: switch based on content FPS
+# touch timer: stay at 90Hz for 200ms after a touch
+# idle timer: drop to 60Hz after 1500ms of no screen updates
+# display power timer: use peak refresh rate for 1000ms on screen wake
+# Triple buffer: needed for consistent 90Hz frame delivery
+# Frame rate override: disabled to stop apps forcing 30fps on 90Hz panels
+PRODUCT_SYSTEM_PROPERTIES += \
+    ro.surface_flinger.use_content_detection_for_refresh_rate=true \
+    ro.surface_flinger.set_touch_timer_ms=200 \
+    ro.surface_flinger.set_idle_timer_ms=1500 \
+    ro.surface_flinger.set_display_power_timer_ms=1000 \
+    ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
+    ro.surface_flinger.enable_frame_rate_override=false
+
+# ============================================================
+# HWUI — HintManager + Skia Frame Pacing (MT6833 / ADPF)
+# ============================================================
+# use_hint_manager: sends HWUI render thread actual CPU frame timings
+#   to the ADPF kernel scheduler for proactive clock boosting
+# target_cpu_time_percent: 66% CPU / 34% GPU split for MT6833
+# reduceopstasksplitting: Skia GPU pipeline efficiency optimization
+PRODUCT_SYSTEM_PROPERTIES += \
+    debug.hwui.use_hint_manager=true \
+    debug.hwui.target_cpu_time_percent=66 \
+    renderthread.skia.reduceopstasksplitting=true
+>>>>>>> 90629b3 (everpal: Add InstallerX and update build configurations)

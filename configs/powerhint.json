@@ -504,5 +504,26 @@
       "Duration": 0,
       "Value": "1"
     }
-  ]
+  ],
+  "AdpfConfig": {
+    "teo_enabled": false,
+    "hint_timeout_ms": 50,
+    "target_utilization": 0.95,
+    "stale_timeout_ms": 100,
+    "max_headroom": 0.25,
+    "min_headroom": 0.0,
+    "headroom_p_gain": 5.0,
+    "headroom_i_gain": 0.0,
+    "headroom_d_gain": 0.0,
+    "headroom_i_max": 512.0,
+    "headroom_i_init": 0.0,
+    "boost_config": {
+      "uclamp_enabled": true,
+      "stale_uclamp_min_interval_ms": 100,
+      "uclamp_min_granularity": 5,
+      "uclamp_min_high_limit": 512,
+      "uclamp_min_low_limit": 0
+    }
+  }
 }
+

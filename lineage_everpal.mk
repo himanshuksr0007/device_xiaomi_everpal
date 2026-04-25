@@ -18,6 +18,21 @@ INCLUDE_DOLBY_AUDIO := true
 # Set to false to disable BCR support at build time
 WITH_GOKU_BCR := true
 
+# InstallerX
+# Set to false to disable InstallerX and keep the default AOSP PackageInstaller
+WITH_INSTALLER_X := true
+
+TARGET_ENABLE_BLUR := false
+TARGET_FACE_UNLOCK_SUPPORTED := true
+SYSTEM_OPTIMIZE_JAVA := true
+TARGET_BOOT_ANIMATION_RES := 1080
+SYSTEMUI_OPTIMIZE_JAVA := true
+TARGET_SUPPORTS_QUICK_TAP := true
+
+# Additional flags
+TORCH_STR_SUPPORTED := true
+TARGET_BUILD_DEVICE_AS_WEBCAM := true
+
 # Inherit some common Lineage stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 

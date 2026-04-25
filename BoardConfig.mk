@@ -3,6 +3,8 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
+DONT_UNCOMPRESS_PRIV_APPS_DEXS := true
+
 DEVICE_PATH := device/xiaomi/everpal
 
 # A/B
