@@ -366,9 +366,7 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/permissions/privapp-permissions-BCR.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-BCR.xml
-<<<<<<< HEAD
-endif
-=======
+
 endif
 
 # InstallerX - Replaces AOSP PackageInstaller
@@ -386,20 +384,6 @@ PRODUCT_PACKAGES_OVERRIDES += \
     PackageInstaller
 
 endif
-
-# Camera - camerahalserver with torch strength control
-# Implements ICameraDevice wrapper that injects torch characteristics and
-# routes turnOnTorchWithStrengthLevel() to the mt6360 sysfs node.
-PRODUCT_SOONG_NAMESPACES += \
-    $(LOCAL_PATH)/camera
-
-PRODUCT_PACKAGES += \
-    camerahalserver \
-    android.hardware.camera.device-torch-strength
-
-# Override prebuilt camerahalserver from vendor
-PRODUCT_PACKAGES_OVERRIDES += \
-    camerahalserver
 
 # ============================================================
 # 90Hz Panel — SurfaceFlinger Scheduler Tuning
@@ -429,4 +413,3 @@ PRODUCT_SYSTEM_PROPERTIES += \
     debug.hwui.use_hint_manager=true \
     debug.hwui.target_cpu_time_percent=66 \
     renderthread.skia.reduceopstasksplitting=true
->>>>>>> 90629b3 (everpal: Add InstallerX and update build configurations)
