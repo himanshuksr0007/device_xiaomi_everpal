@@ -244,7 +244,7 @@ debug.sf.frame_rate_multiple_threshold=90
 debug.sf.predict_hwc_composition_strategy=1
 debug.sf.treat_170m_as_sRGB=1
 ro.surface_flinger.clear_slots_with_set_layer_buffer=false
-ro.surface_flinger.enable_frame_rate_override=false
+ro.surface_flinger.enable_frame_rate_override=true
 ro.surface_flinger.force_hwc_copy_for_virtual_displays=true
 ro.surface_flinger.has_wide_color_display=true
 ro.surface_flinger.primary_display_orientation=ORIENTATION_0
@@ -309,12 +309,8 @@ ro.surface_flinger.max_frame_buffer_acquired_buffers=3
 # HWUI CPU hint manager
 # ============================================================
 debug.hwui.use_hint_manager=true
-debug.hwui.target_cpu_time_percent=30
+renderthread.skia.reduceopstasksplitting=true
 
-# ============================================================
-# App Freezer — suspends background apps at kernel level
-# ============================================================
-ro.cached_apps_freezer.enabled=true
 
 # ============================================================
 # MTK window start performance hooks (vendor blob dependent)
@@ -322,12 +318,6 @@ ro.cached_apps_freezer.enabled=true
 ro.mtk_perf_fast_start_win=1
 ro.mtk_perf_simple_start_win=1
 
-# ============================================================
-# ZRAM writeback tuning
-# ============================================================
-ro.zram.mark_idle_delay=60
-ro.zram.first_wb_delay=180
-ro.zram.next_wb_delay=1440
 
 # ============================================================
 # Incremental FS — faster large app installs
@@ -338,3 +328,6 @@ ro.incremental.enable=yes
 # Input touch CPU boost (MediaTek power HAL)
 # ============================================================
 vendor.perf.touchwake.enable=1
+
+#Disable EGL/GPU Completion Tracing
+debug.egl.traceGpuCompletion=0

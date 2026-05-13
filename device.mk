@@ -388,31 +388,3 @@ PRODUCT_PACKAGES_OVERRIDES += \
 
 endif
 
-# ============================================================
-# 90Hz Panel — SurfaceFlinger Scheduler Tuning
-# ============================================================
-# Dynamic refresh rate: switch based on content FPS
-# touch timer: stay at 90Hz for 200ms after a touch
-# idle timer: drop to 60Hz after 1500ms of no screen updates
-# display power timer: use peak refresh rate for 1000ms on screen wake
-# Triple buffer: needed for consistent 90Hz frame delivery
-# Frame rate override: disabled to stop apps forcing 30fps on 90Hz panels
-PRODUCT_SYSTEM_PROPERTIES += \
-    ro.surface_flinger.use_content_detection_for_refresh_rate=true \
-    ro.surface_flinger.set_touch_timer_ms=200 \
-    ro.surface_flinger.set_idle_timer_ms=1500 \
-    ro.surface_flinger.set_display_power_timer_ms=1000 \
-    ro.surface_flinger.max_frame_buffer_acquired_buffers=3 \
-    ro.surface_flinger.enable_frame_rate_override=false
-
-# ============================================================
-# HWUI — HintManager + Skia Frame Pacing (MT6833 / ADPF)
-# ============================================================
-# use_hint_manager: sends HWUI render thread actual CPU frame timings
-#   to the ADPF kernel scheduler for proactive clock boosting
-# target_cpu_time_percent: 66% CPU / 34% GPU split for MT6833
-# reduceopstasksplitting: Skia GPU pipeline efficiency optimization
-PRODUCT_SYSTEM_PROPERTIES += \
-    debug.hwui.use_hint_manager=true \
-    debug.hwui.target_cpu_time_percent=66 \
-    renderthread.skia.reduceopstasksplitting=true
