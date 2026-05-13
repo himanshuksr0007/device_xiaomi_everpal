@@ -382,9 +382,5 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/permissions/privapp-permissions-InstallerX.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/permissions/privapp-permissions-InstallerX.xml
 
-# Remove stock AOSP PackageInstaller
-PRODUCT_PACKAGES_OVERRIDES += \
-    PackageInstaller
-
 endif
 

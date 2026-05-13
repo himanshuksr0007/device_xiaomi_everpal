@@ -3,9 +3,8 @@ android_app_import {
     apk: "InstallerX.apk",
     privileged: true,
     presigned: true,
-    preprocessed: true,
     product_specific: false,
-    // This prevents dex re-optimization issues on Android 16
+    overrides: ["PackageInstaller"],
     dex_preopt: {
         enabled: false,
     },
