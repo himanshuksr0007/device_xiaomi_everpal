@@ -3,6 +3,7 @@ android_app_import {
     apk: "InstallerX.apk",
     privileged: true,
     presigned: true,
+    preprocessed: true,
     product_specific: false,
     overrides: ["PackageInstaller"],
     dex_preopt: {
