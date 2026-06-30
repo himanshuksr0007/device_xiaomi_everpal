@@ -29,6 +29,11 @@ $(call inherit-product, hardware/dolby/dolby.mk)
 PRODUCT_PACKAGES += \
     LunarisDolby
 endif
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.telephony.sim.count=2 \
+    ro.apk_verity.mode=2
+
 # A/B
 PRODUCT_PACKAGES += \
     android.hardware.boot-service.default_recovery \

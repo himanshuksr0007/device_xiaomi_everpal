@@ -7,18 +7,15 @@ ro.product.brand=POCO
 ro.product.vendor.brand=POCO
 
 # Build Info (Codename)
-ro.product.device=evergo
 ro.product.vendor.device=evergo
 
 # Build Info (Fingerprint)
 ro.vendor.build.fingerprint=POCO/evergo_p_in/evergo:13/TP1A.220624.014/V14.0.3.0.TGBCNXM:user/release-keys
 
 # Build Info (Marketname)
-ro.product.marketname=POCO M4 Pro 5G
 ro.product.vendor.marketname=POCO M4 Pro 5G
 
 # Build Info (Model)
-ro.product.model=22031116AI
 ro.product.vendor.model=22031116AI
 
 # NFC

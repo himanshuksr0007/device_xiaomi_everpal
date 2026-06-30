@@ -206,7 +206,6 @@ persist.vendor.radio.smart.data.switch=1
 persist.vendor.vonr_setting_support=1
 ro.telephony.default_network=32,32,32,32
 ro.telephony.iwlan_operation_mode=AP-assisted
-ro.telephony.sim.count=2
 ro.vendor.md_prop_ver=1
 ro.vendor.mediatek.rsc_name=GL
 ro.vendor.mtk_c2k_lte_mode=0
@@ -275,7 +274,6 @@ ro.vendor.mtk_svp_on_mtee_support=1
 ro.vendor.mtk_tee_gp_support=1
 
 # Verity
-ro.apk_verity.mode=2
 
 # USB
 vendor.usb.controller=musb-hdrc
@@ -336,3 +334,6 @@ vendor.perf.touchwake.enable=1
 
 #Disable EGL/GPU Completion Tracing
 debug.egl.traceGpuCompletion=0
+
+persist.sys.helix_debug_enabled 1 
+

@@ -3,18 +3,15 @@
 #
 
 # Build Info (Codename)
-ro.product.device=opal
 ro.product.vendor.device=opal
 
 # Build Info (Fingerprint)
 ro.vendor.build.fingerprint=Redmi/opal_global/opal:13/TP1A.220624.014/V14.0.5.0.TGLMIXM:user/release-keys
 
 # Build Info (Marketname)
-ro.product.marketname=Redmi Note 11S 5G
 ro.product.vendor.marketname=Redmi Note 11S 5G
 
 # Build Info (Model)
-ro.product.model=22031116BG
 ro.product.vendor.model=22031116BG
 
 # NFC
