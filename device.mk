@@ -389,3 +389,11 @@ PRODUCT_COPY_FILES += \
 
 endif
 
+# SELinux Permissive (debug builds only)
+# Set IS_BUILDING_PERMISSIVE := true in lineage_everpal.mk to enable | default is false
+IS_BUILDING_PERMISSIVE ?= false
+
+ifeq ($(IS_BUILDING_PERMISSIVE),true)
+BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
+BOARD_BOOTCONFIG += androidboot.selinux=permissive
+endif

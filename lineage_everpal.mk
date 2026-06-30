@@ -22,6 +22,9 @@ WITH_GOKU_BCR := true
 # Set to false to disable InstallerX and keep the default AOSP PackageInstaller
 WITH_INSTALLER_X := true
 
+# SELinux Permissive (debug builds only)
+# Set IS_BUILDING_PERMISSIVE := true in lineage_everpal.mk to enable
+IS_BUILDING_PERMISSIVE := false
 
 TARGET_ENABLE_BLUR := false
 TARGET_FACE_UNLOCK_SUPPORTED := true
