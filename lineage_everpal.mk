@@ -10,6 +10,9 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/full_base_telephony.mk)
 # Inherit from device makefile.
 $(call inherit-product, device/xiaomi/everpal/device.mk)
 
+# Bypass VINTF Kernel Version Check for legacy kernels [DO NOT REMOVE]
+PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
+
 # Dolby Audio
 # Set to false to disable Dolby Audio support at build time
 INCLUDE_DOLBY_AUDIO := true
