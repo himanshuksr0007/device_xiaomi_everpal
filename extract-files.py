@@ -115,6 +115,8 @@ blob_fixups: blob_fixups_user_type = {
         .add_needed('liblog.so'),
     ('vendor/lib64/libwvhidl.so', 'vendor/lib64/mediadrm/libwvdrmengine.so'): blob_fixup()
         .replace_needed('libprotobuf-cpp-lite-3.9.1.so', 'libprotobuf-cpp-full-3.9.1.so'),
+    'vendor/bin/mnld': blob_fixup()
+        .replace_needed('libmnl.so', 'libmnl_vendor.so'),
 }  # fmt: skip
 
 module = ExtractUtilsModule(
