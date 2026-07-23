@@ -397,3 +397,10 @@ ifeq ($(IS_BUILDING_PERMISSIVE),true)
 BOARD_KERNEL_CMDLINE += androidboot.selinux=permissive
 BOARD_BOOTCONFIG += androidboot.selinux=permissive
 endif
+
+# libwifi-hal-wrapper: MT6833 vendor blob predates the U-QPR2/Baklava-QPR0
+# wifi_hal_fn struct layout changes; opt in to the legacy (smaller) struct
+# so the wrapper's dlsym offsets match what the blob actually populates.
+SOONG_CONFIG_NAMESPACES += mediatek_wifi_hal
+$(call soong_config_set_bool,mediatek_wifi_hal,use_pre_u_qpr2_struct,true)
+$(call soong_config_set_bool,mediatek_wifi_hal,use_pre_baklava_qpr0_struct,true)
