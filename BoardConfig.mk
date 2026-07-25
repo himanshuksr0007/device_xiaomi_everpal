@@ -194,3 +194,8 @@ WIFI_HAL_INTERFACE_COMBINATIONS += ,{{{STA}, 1}, {{NAN}, 1}}
 
 # Inherit the proprietary files
 include vendor/xiaomi/everpal/BoardConfigVendor.mk
+
+# Enable MTK GED KPI support for GPU DVFS timestamp reporting
+PRODUCT_SOONG_NAMESPACES += libgui
+SOONG_CONFIG_libgui += support_mtk_ged_kpi
+SOONG_CONFIG_libgui_support_mtk_ged_kpi := true
