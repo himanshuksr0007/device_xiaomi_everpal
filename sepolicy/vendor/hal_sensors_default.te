@@ -1,5 +1,4 @@
 allow hal_sensors_default hidraw_device:chr_file rw_file_perms;
-get_prop(hal_sensors_default, vendor_dynamic_sensor_prop)
 
 # Allow access to the HALs
 hal_client_domain(hal_sensors_default, hal_audio)
