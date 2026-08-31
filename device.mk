@@ -6,6 +6,9 @@
 # MIUI Camera
 $(call inherit-product-if-exists, vendor/xiaomi/camera/miuicamera.mk)
 
+# DeviceAsWebcam
+TARGET_BUILD_DEVICE_AS_WEBCAM := true
+
 # Dalvik VM Configuration
 $(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
@@ -236,6 +239,7 @@ PRODUCT_COPY_FILES += \
 
 # Overlays
 PRODUCT_PACKAGES += \
+    DeviceAsWebcamResTarget \
     FrameworksResOverlayEverpal \
     Launcher3DeviceOverlay \
     SettingsOverlayEverpal \

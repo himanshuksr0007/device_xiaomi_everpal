@@ -276,6 +276,7 @@ ro.vendor.mtk_tee_gp_support=1
 # Verity
 
 # USB
+ro.usb.uvc.enabled=true
 vendor.usb.controller=musb-hdrc
 
 # WiFi
