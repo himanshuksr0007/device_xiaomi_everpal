@@ -4,7 +4,10 @@ aaudio.mmap_policy=2
 persist.vendor.audiohal.aurisys.pcm_dump_on=0
 persist.vendor.audiohal.p2w_dump_on=0
 persist.vendor.audiohal.pcm_mixer_dump_on=0
-ro.audio.monitorRotation=true
+# Do not monitor device rotation for spatializer; this phone has no
+# head-tracker HAL and every rotation event causes SpatializerHelper
+# to re-evaluate the headset route, contributing to the routing storm.
+ro.audio.monitorRotation=false
 ro.config.media_vol_default=10
 ro.config.media_vol_steps=25
 ro.config.vc_call_vol_steps=11
