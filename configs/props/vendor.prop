@@ -297,6 +297,8 @@ vendor.usb.controller=musb-hdrc
 # WiFi
 ro.vendor.wifi.sap.concurrent.iface=ap1
 ro.vendor.wifi.sap.interface=ap0
+# MTK firmware does not support VENDOR_SUBCMD_GET_LINK_STATS
+wifi.interface.link_layer_stats_polling=false
 
 # Zygote
 zygote.critical_window.minute=10
