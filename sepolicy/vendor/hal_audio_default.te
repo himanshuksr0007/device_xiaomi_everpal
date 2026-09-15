@@ -1,1 +1,4 @@
 allow hal_audio_default persist_data_file:dir search;
+
+# Allow audioserver to read vendor default properties at startup
+get_prop(hal_audio_default, vendor_default_prop)

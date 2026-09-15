@@ -12,7 +12,8 @@ ro.config.media_vol_default=10
 ro.config.media_vol_steps=25
 ro.config.vc_call_vol_steps=11
 ro.vendor.audio.spk.stereo=true
-ro.vendor.audio.us.proximity=true
+# No ultrasound hardware on everpal; disable to prevent audioserver crash
+ro.vendor.audio.us.proximity=false
 ro.vendor.audio.vocal.support=true
 vendor.audiohal.telephonytx.type=2
 vendor.streamin.pcm.dump=0
@@ -28,6 +29,8 @@ persist.vendor.audio.spatializer.speaker_enabled=false
 # setting the effect-order hint prevents the EffectDownmix re-enter loop
 # that fires on every accdet (jack detect) state transition.
 ro.audio.spatializer.headtracking_supported=false
+# DecibelSpatializer HAL does not implement params 10/13; use legacy path
+ro.audio.spatializer.use_legacy_param_query=true
 
 # Bluetooth
 bluetooth.device.class_of_device=90,2,12
