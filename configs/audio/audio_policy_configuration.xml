@@ -124,7 +124,8 @@
                 <mixPort name="hifi_playback" role="source"/>
                 <mixPort name="hifi_input" role="sink"/>
                 <!--Spatial Audio-->
-                <mixPort name="immersive_out" role="source" flags="AUDIO_OUTPUT_FLAG_SPATIALIZER">
+                <mixPort name="immersive_out" role="source" flags="AUDIO_OUTPUT_FLAG_SPATIALIZER"
+                         maxOpenCount="1" maxActiveCount="1">
                     <profile name="" format="AUDIO_FORMAT_PCM_FLOAT"
                             samplingRates="48000" channelMasks="AUDIO_CHANNEL_OUT_STEREO AUDIO_CHANNEL_OUT_5POINT1 AUDIO_CHANNEL_OUT_7POINT1"/>
                 <!--Spatial Audio-->
