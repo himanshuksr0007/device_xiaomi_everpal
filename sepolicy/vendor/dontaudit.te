@@ -1,1 +1,4 @@
 dontaudit untrusted_app ashmem_device:chr_file open;
+
+# BT HAL is @1.0 only; suppress audit noise from early-hal hwservicemanager lookup
+dontaudit hal_bluetooth_default hwservicemanager_prop:file { read open getattr map };
