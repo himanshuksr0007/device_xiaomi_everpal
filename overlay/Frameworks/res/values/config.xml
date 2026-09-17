@@ -549,4 +549,20 @@
     <!-- If true, the screen can be rotated via the accelerometer in all 4
          rotations as the default behavior. -->
     <bool name="config_allowAllRotations">true</bool>
+
+    <!-- RAM Management -->
+    <!-- Maximum number of cached processes to keep around -->
+    <integer name="config_cachedProcessLimit">64</integer>
+
+    <!-- Maximum number of hidden app processes -->
+    <integer name="config_curMaxCachedProcesses">64</integer>
+
+    <!-- Maximum number of empty app processes -->
+    <integer name="config_curMaxEmptyProcesses">32</integer>
+
+    <!-- The minimum number of cached apps we want to be able to keep around -->
+    <integer name="config_minCachedProcesses">8</integer>
+
+    <!-- Enable smart idle maintenance -->
+    <bool name="config_enableSmartIdle">true</bool>
 </resources>

@@ -1,0 +1,5 @@
+on property:sys.boot_completed=1
+    # After boot, further optimize memory management
+    write /proc/sys/vm/stat_interval 10
+    # compact_memory is the 4.14 equivalent of compaction_proactiveness (5.8+)
+    write /proc/sys/vm/compact_memory 1
