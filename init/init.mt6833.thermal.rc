@@ -1,4 +1,6 @@
 # Thermal init for MT6833
+# Everpal Thermal Management (sconfig 10 NoLimits profile)
+# Unlocks full 2.0GHz A55 / 2.4GHz A76 hardware clocks with 55°C thermal headroom
 
 on fs
     mkdir /data/vendor/.tp/ 0775 system system
@@ -15,6 +17,12 @@ on boot
 
 on charger
     start mi_thermald
+
+# Apply sconfig 10 (Xiaomi Mobile Game / NoLimits profile) on boot completion
+# Raises throttle trigger from 36°C to 55°C for sustained performance
+on property:sys.boot_completed=1
+    chmod 0664 /sys/class/thermal/thermal_message/sconfig
+    write /sys/class/thermal/thermal_message/sconfig 10
 
 service mi_thermald /vendor/bin/mi_thermald
 	class main
