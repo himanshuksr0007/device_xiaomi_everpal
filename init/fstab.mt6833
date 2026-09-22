@@ -4,13 +4,12 @@
 # <src>						<mnt_point>			<type>		<mnt_flags and options>													<fs_mgr_flags>
 
 # Logical Partitions
-system						/system				erofs		ro														wait,avb=vbmeta_system,logical,first_stage_mount,slotselect
-system						/system				ext4		ro,barrier=1														wait,avb=vbmeta_system,logical,first_stage_mount,slotselect
-system_ext					/system_ext			erofs		ro														wait,avb,logical,first_stage_mount,slotselect
-vendor						/vendor				erofs		ro														wait,avb,logical,first_stage_mount,slotselect
-vendor_dlkm					/vendor_dlkm			erofs		ro														wait,avb,logical,first_stage_mount,slotselect
-odm						/odm				erofs		ro														wait,avb,logical,first_stage_mount,slotselect
-product						/product			erofs		ro														wait,avb,logical,first_stage_mount,slotselect
+system						/system				ext4		noatime,ro														wait,avb=vbmeta_system,logical,first_stage_mount,slotselect
+system_ext					/system_ext			ext4		noatime,ro														wait,avb,logical,first_stage_mount,slotselect
+vendor						/vendor				ext4		noatime,ro														wait,avb,logical,first_stage_mount,slotselect
+vendor_dlkm					/vendor_dlkm			ext4		noatime,ro														wait,avb,logical,first_stage_mount,slotselect
+odm						/odm				ext4		noatime,ro														wait,avb,logical,first_stage_mount,slotselect
+product						/product			ext4		noatime,ro														wait,avb,logical,first_stage_mount,slotselect
 
 # Boot
 /dev/block/by-name/boot				/boot				emmc		defaults														first_stage_mount,nofail,slotselect
