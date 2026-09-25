@@ -24,7 +24,7 @@ vendor.usbsph.ul.pcm.dump=0
 
 # Spatial Audio
 # Speaker spatial audio: disable (mono-class speaker, no HRTF benefit)
-persist.vendor.audio.spatializer.speaker_enabled=false
+persist.vendor.audio.spatializer.speaker_enabled?=false
 # Headset spatial audio: allow the spatializer to run on headset routes;
 # setting the effect-order hint prevents the EffectDownmix re-enter loop
 # that fires on every accdet (jack detect) state transition.
