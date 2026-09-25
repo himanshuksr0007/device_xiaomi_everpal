@@ -109,6 +109,10 @@ PRODUCT_PACKAGES += \
 TARGET_SCREEN_HEIGHT := 2400
 TARGET_SCREEN_WIDTH := 1080
 
+# HBM
+HBM_SUPPORTED := true
+HBM_NODE := /sys/class/leds/lcd-backlight/hbm
+
 # Cgroup
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/task_profiles.json:$(TARGET_COPY_OUT_VENDOR)/etc/task_profiles.json \
