@@ -339,7 +339,7 @@
       "PowerHint": "INTERACTION",
       "Node": "GPUSchedPeriod",
       "Duration": 500,
-      "Value": "0"
+      "Value": "50"
     },
     {
       "PowerHint": "INTERACTION",
@@ -424,7 +424,7 @@
       "PowerHint": "LAUNCH",
       "Node": "GPUSchedPeriod",
       "Duration": 3000,
-      "Value": "0"
+      "Value": "50"
     },
     {
       "PowerHint": "LAUNCH",
@@ -461,7 +461,7 @@
       "PowerHint": "EXPENSIVE_RENDERING",
       "Node": "GPUSchedPeriod",
       "Duration": 0,
-      "Value": "0"
+      "Value": "50"
     },
     {
       "PowerHint": "EXPENSIVE_RENDERING",

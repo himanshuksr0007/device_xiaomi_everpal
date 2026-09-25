@@ -9,6 +9,7 @@ $(call inherit-product-if-exists, vendor/xiaomi/camera/miuicamera.mk)
 # libsdk_sr bypass: interpose libmialgoengine.so's sr_* symbols so
 # HlSR::Initialize never reaches libsdk_sr.so ocl_runtime.cpp:834
 # (CL_INVALID_BINARY on r32p1-01eac0 UMDD + r32p1-00bet4 kbase).
+# Same shim also defers MIADestroySession to background (slow sync teardown).
 TARGET_LD_SHIM_LIBS += \
     /vendor/lib64/libmialgoengine.so|libsdk_sr_shim
 
