@@ -1,0 +1,2 @@
+# Ax Kernel Manager GPU (MTK GED kHz controls are vendor-labeled sysfs_ged)
+allow system_server sysfs_ged:file rw_file_perms;

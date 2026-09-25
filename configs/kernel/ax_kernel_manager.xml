@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- mt6833: CPU policy0/policy6, Mali-G57 GPU via GED (gpu_clock reads MHz) -->
+<kernel-manager>
+    <cpu
+        id="little"
+        group="Little Cluster"
+        cpuIds="0-5"
+        minId="axion_min_freq"
+        maxId="axion_max_freq"
+        governorId="little_cpu_governor"
+        node="/sys/devices/system/cpu/cpufreq/policy0" />
+
+    <cpu
+        id="big"
+        group="Big Cluster"
+        cpuIds="6-7"
+        minId="axion_min_freq_big"
+        maxId="axion_max_freq_big"
+        governorId="big_cpu_governor"
+        node="/sys/devices/system/cpu/cpufreq/policy6" />
+
+    <gpu
+        node="/sys/module/ged/parameters"
+        minNode="/sys/module/ged/parameters/gpu_cust_boost_freq"
+        maxNode="/sys/module/ged/parameters/gpu_cust_upbound_freq"
+        currentNode="/sys/kernel/gpu/gpu_clock"
+        usageNode="/sys/module/ged/parameters/gpu_loading"
+        frequencyMultiplier="1000"
+        values="1068000,1059000,1051000,1042000,1034000,1025000,1017000,1008000,1000000,985000,970000,955000,940000,925000,910000,895000,880000,868000,857000,846000,835000,823000,812000,801000,790000,778000,767000,756000,745000,733000,722000,711000,700000,674000,648000,622000,596000,570000,545000,519000,493000,467000,441000,415000,390000" />
+</kernel-manager>

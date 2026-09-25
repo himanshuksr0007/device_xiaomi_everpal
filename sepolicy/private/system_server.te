@@ -1,0 +1,8 @@
+# Ax Kernel Manager
+allow system_server sysfs_devices_system_cpu:file rw_file_perms;
+allow system_server sysfs_gpu:file rw_file_perms;
+
+# AxionOS performance mode
+allow system_server proc_dirty:file rw_file_perms;
+allow system_server proc_drop_caches:file rw_file_perms;
+allow system_server proc_sched:file rw_file_perms;
