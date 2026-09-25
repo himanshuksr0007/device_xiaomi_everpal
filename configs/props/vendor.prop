@@ -285,6 +285,8 @@ ro.vendor.vnd.current_rsc_path=/vendor/etc/rsc/GL
 telephony.active_modems.max_count=2
 
 # Surface Flinger
+# r32p1 Vulkan can't import VDEC buffers (SF abort on video); keep GLES compositor.
+debug.renderengine.backend=skiaglthreaded
 debug.sf.auto_latch_unsignaled=1
 debug.sf.enable_adpf_cpu_hint=true
 debug.sf.enable_egl_image_tracker=0
