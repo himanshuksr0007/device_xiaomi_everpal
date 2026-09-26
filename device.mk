@@ -334,6 +334,32 @@ PRODUCT_COPY_FILES += \
 
 include $(LOCAL_PATH)/configs/props/vendor_logtag.mk
 
+# Graphics
+PRODUCT_PRODUCT_PROPERTIES += \
+    debug.hwui.renderer=skiagl \
+    debug.renderengine.backend=skiaglthreaded \
+    persist.sys.ax_touch_boost=true \
+    persist.sys.vk_use_ogl_for_media=true
+
+PRODUCT_VENDOR_PROPERTIES += \
+    ro.hwui.use_vulkan=false \
+    debug.hwui.renderer=skiagl \
+    debug.renderengine.backend=skiaglthreaded \
+    persist.sys.vk_use_ogl_for_media=true
+
+PRODUCT_SYSTEM_PROPERTIES += \
+    ro.hwui.use_vulkan=false \
+    debug.hwui.renderer=skiagl \
+    debug.renderengine.backend=skiaglthreaded
+
+PRODUCT_SYSTEM_EXT_PROPERTIES += \
+    ro.hwui.use_vulkan=false \
+    debug.hwui.renderer=skiagl \
+    debug.renderengine.backend=skiaglthreaded
+
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hwui.use_vulkan=false
+
 # Public Libraries
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/public.libraries.txt:$(TARGET_COPY_OUT_VENDOR)/etc/public.libraries.txt
