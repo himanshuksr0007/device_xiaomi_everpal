@@ -212,3 +212,7 @@ include vendor/xiaomi/everpal/BoardConfigVendor.mk
 PRODUCT_SOONG_NAMESPACES += libgui
 SOONG_CONFIG_libgui += support_mtk_ged_kpi
 SOONG_CONFIG_libgui_support_mtk_ged_kpi := true
+
+# Allow overriding default product props (Axion Vulkan-first defaults, AOSP
+# ro.hwui.use_vulkan default); last assignment wins per partition
+BUILD_BROKEN_DUP_SYSPROP := true
