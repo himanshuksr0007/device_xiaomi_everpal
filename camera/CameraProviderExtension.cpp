@@ -16,6 +16,9 @@
 #include <fstream>
 #include <string>
 
+#define LOG_TAG "TorchExtEverpal"
+#include <log/log.h>
+
 // ---------------------------------------------------------------------------
 
 static const std::string kSysfsTorch = "/sys/devices/platform/flashlights_mt6360/torch_brightness";
@@ -45,12 +48,18 @@ struct flashlight_user_arg {
 // ---------------------------------------------------------------------------
 
 template <typename T>
-static void setNode(const std::string& path, const T& value) {
+static bool setNode(const std::string& path, const T& value) {
     std::ofstream file(path);
     if (!file.is_open()) {
-        return;
+        ALOGW("setNode: open %s failed: %s", path.c_str(), strerror(errno));
+        return false;
     }
     file << value << std::endl;
+    if (file.fail()) {
+        ALOGW("setNode: write %s failed", path.c_str());
+        return false;
+    }
+    return true;
 }
 
 template <typename T>
@@ -95,7 +104,65 @@ static int32_t clampLevel(int32_t level) {
 
 // ---------------------------------------------------------------------------
 
+static int validKeysMask() {
+    static int mask = -1;
+    if (mask >= 0) {
+        return mask;
+    }
+    mask = 0;
+    for (int typeId = 1; typeId <= 2; typeId++) {
+        for (int ctId = 1; ctId <= 2; ctId++) {
+            int32_t max = 0;
+            if (torchIoctl(FLASH_IOC_GET_MAX_TORCH_DUTY, &max, typeId, ctId) == 0 && max >= 1) {
+                mask |= 1 << ((typeId - 1) * 2 + (ctId - 1));
+                ALOGI("valid torch key type=%d ct=%d max=%d", typeId, ctId, max);
+            }
+        }
+    }
+    if (mask == 0) {
+        mask = 1;
+        ALOGW("no torch key responded, falling back to type=1 ct=1");
+    }
+    return mask;
+}
+
+static void forEachKey(void (*fn)(int typeId, int ctId, int32_t value, bool* ok), int32_t value,
+        bool* ok) {
+    int mask = validKeysMask();
+    for (int typeId = 1; typeId <= 2; typeId++) {
+        for (int ctId = 1; ctId <= 2; ctId++) {
+            if (mask & (1 << ((typeId - 1) * 2 + (ctId - 1)))) {
+                fn(typeId, ctId, value, ok);
+            }
+        }
+    }
+}
+
+static void ioctlSetDuty(int typeId, int ctId, int32_t value, bool* ok) {
+    int32_t v = value;
+    if (torchIoctl(FLASH_IOC_SET_DUTY, &v, typeId, ctId) != 0 && ok != nullptr) {
+        *ok = false;
+    }
+}
+
+static void ioctlSetTimeout(int typeId, int ctId, int32_t value, bool* ok) {
+    int32_t v = value;
+    if (torchIoctl(FLASH_IOC_SET_TIME_OUT_TIME_MS, &v, typeId, ctId) != 0 && ok != nullptr) {
+        *ok = false;
+    }
+}
+
+static void ioctlSetOnOff(int typeId, int ctId, int32_t value, bool* ok) {
+    int32_t v = value;
+    if (torchIoctl(FLASH_IOC_SET_ONOFF, &v, typeId, ctId) != 0 && ok != nullptr) {
+        *ok = false;
+    }
+}
+
+// ---------------------------------------------------------------------------
+
 bool supportsTorchStrengthControlExt() {
+    ALOGI("supportsTorchStrengthControlExt: true (max=%d default=%d)", kMaxLevel, kDefaultLevel);
     return true;
 }
 
@@ -112,26 +179,37 @@ int32_t getTorchStrengthLevelExt() {
     if (val >= 1 && val <= kMaxLevel) {
         return val;
     }
-    int32_t cur = 0;
-    if (torchIoctl(FLASH_IOC_GET_CURRENT_TORCH_DUTY, &cur, 1, 1) == 0 && cur >= 1) {
-        return clampLevel(cur + 1);
+    int mask = validKeysMask();
+    for (int typeId = 1; typeId <= 2; typeId++) {
+        for (int ctId = 1; ctId <= 2; ctId++) {
+            if (mask & (1 << ((typeId - 1) * 2 + (ctId - 1)))) {
+                int32_t cur = 0;
+                if (torchIoctl(FLASH_IOC_GET_CURRENT_TORCH_DUTY, &cur, typeId, ctId) == 0 &&
+                        cur >= 1) {
+                    return clampLevel(cur + 1);
+                }
+            }
+        }
     }
     return kDefaultLevel;
 }
 
 void setTorchStrengthLevelExt(int32_t torchStrength, bool enabled) {
+    ALOGI("setTorchStrengthLevelExt: strength=%d enabled=%d", torchStrength, enabled);
     if (!enabled || torchStrength <= 0) {
-        int32_t off = 0;
-        (void)torchIoctl(FLASH_IOC_SET_ONOFF, &off, 1, 1);
-        setNode(kSysfsTorch, 0);
+        bool ok = true;
+        forEachKey(ioctlSetOnOff, 0, &ok);
+        bool sysfsOk = setNode(kSysfsTorch, 0);
+        ALOGI("setTorchStrengthLevelExt: off (ioctlOk=%d sysfsOk=%d)", ok, sysfsOk);
         return;
     }
     int32_t level = clampLevel(torchStrength);
     int32_t duty = level - 1;
-    (void)torchIoctl(FLASH_IOC_SET_DUTY, &duty, 1, 1);
-    int32_t timeoutMs = 0;
-    (void)torchIoctl(FLASH_IOC_SET_TIME_OUT_TIME_MS, &timeoutMs, 1, 1);
-    int32_t on = 1;
-    (void)torchIoctl(FLASH_IOC_SET_ONOFF, &on, 1, 1);
-    setNode(kSysfsTorch, level);
+    bool ok = true;
+    forEachKey(ioctlSetDuty, duty, &ok);
+    forEachKey(ioctlSetTimeout, 0, &ok);
+    forEachKey(ioctlSetOnOff, 1, &ok);
+    bool sysfsOk = setNode(kSysfsTorch, level);
+    ALOGI("setTorchStrengthLevelExt: level=%d duty=%d (ioctlOk=%d sysfsOk=%d)", level, duty, ok,
+            sysfsOk);
 }
