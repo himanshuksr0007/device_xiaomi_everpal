@@ -565,4 +565,7 @@
 
     <!-- Enable smart idle maintenance -->
     <bool name="config_enableSmartIdle">true</bool>
+
+    <!-- Flag indicating whether we should enable smart battery. -->
+    <bool name="config_smart_battery_available">true</bool>
 </resources>
