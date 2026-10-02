@@ -58,6 +58,7 @@ ro.vendor.mtk.bt_sap_enable=true
 vendor.bluetooth.ldac.abr=true
 
 # Camera
+persist.vendor.camera.privapp.list=com.android.camera
 camera.disable_zsl_mode=1
 persist.vendor.camera3.pipeline.bufnum.base.imgo=4
 persist.vendor.camera3.pipeline.bufnum.base.lcso=4
