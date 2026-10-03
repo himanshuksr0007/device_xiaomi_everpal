@@ -295,6 +295,8 @@ vendor/etc/camera/dof_mecp.bin
 vendor/etc/camera/goldResult_K16B_1.bin
 vendor/etc/camera/goldResult_k16b_2.bin
 vendor/etc/camera/intsense_config_undistort.bin
+vendor/etc/camera/mibokeh_mt6853_opencl.bin
+vendor/etc/camera/mibokeh_mt6853_parameter.bin
 vendor/etc/camera/model/dof_model/capture_cache
 vendor/etc/camera/model/dof_model/capture_model
 vendor/etc/camera/model/dof_model/capture_policy
