@@ -31,6 +31,9 @@ $(call inherit-product, vendor/mediatek/ims/ims.mk)
 # Inherit the proprietary files
 $(call inherit-product, vendor/xiaomi/everpal/everpal-vendor.mk)
 
+# Kaeru bootloader prebuilt (ships in system image, manual flash required)
+$(call inherit-product, device/xiaomi/everpal/kaeru.mk)
+
 # Dolby
 ifeq ($(INCLUDE_DOLBY_AUDIO),true)
 $(call inherit-product, hardware/dolby/dolby.mk)
