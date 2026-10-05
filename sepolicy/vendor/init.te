@@ -1,0 +1,2 @@
+# Torch strength control (init chown/chmod on boot, mirrors ueventd entry)
+allow init sysfs_torch:file setattr;
