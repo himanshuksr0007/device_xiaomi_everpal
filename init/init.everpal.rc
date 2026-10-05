@@ -21,6 +21,9 @@ on post-fs-data
     chmod 0660 /sys/kernel/gpu/gpu_clock
     chown system system /sys/module/ged/parameters/gpu_loading
     chmod 0660 /sys/module/ged/parameters/gpu_loading
+    # Torch strength control (MT6360, ueventd restore is unreliable here)
+    chown cameraserver camera /sys/devices/platform/flashlights_mt6360/torch_brightness
+    chmod 0660 /sys/devices/platform/flashlights_mt6360/torch_brightness
 
 on property:sys.boot_completed=1
     # Dynamic ZRAM setup
