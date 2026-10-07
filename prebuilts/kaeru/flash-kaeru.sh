@@ -8,6 +8,8 @@
 #
 # What it does:
 #   flashes prebuilts/kaeru/Kaeru.bin to lk AND lk2 via fastboot.
+#   It does NOT unlock seccfg – unlocking needs BROM mode
+#   (mtkclient/penumbra). It refuses to flash locked devices.
 #
 # What it will NEVER do (brick-path blocks):
 #   - never touches preloader, seccfg, nvram, nvdata, protect1/2,
@@ -62,7 +64,22 @@ ACTUAL_SHA256="$(sha256sum "${BIN}" | awk '{print $1}')"
 command -v fastboot >/dev/null 2>&1 || die "fastboot not in PATH. For first install use BROM mode (mtkclient/SP Flash), see README.md."
 [ -n "$(fastboot devices)" ] || die "no device in fastboot. Reboot to bootloader first."
 
-# 3. Variant check (evergo only for now)
+# 3. Lock-state preflight (fail closed).
+# This script NEVER unlocks seccfg itself – unlocking needs BROM mode
+# (mtkclient/penumbra, see README.md). It only refuses to flash a
+# locked device, since flashing Kaeru over locked seccfg bricks.
+UNLOCK_STATE="$(fastboot getvar unlocked 2>&1 | tr '[:upper:]' '[:lower:]' || true)"
+case "${UNLOCK_STATE}" in
+  *unlocked:\ yes*)
+    ;;
+  *)
+    echo "Device does not report 'unlocked: yes':" >&2
+    echo "${UNLOCK_STATE}" >&2
+    die "unlock the bootloader AND seccfg first (BROM via mtkclient/penumbra, see README.md), then re-run. Refusing to flash."
+    ;;
+esac
+
+# 4. Variant check (evergo only for now)
 PRODUCT="$(fastboot getvar product 2>&1 | tr '[:upper:]' '[:lower:]' || true)"
 if [ "${FORCE}" -eq 0 ]; then
   MATCH=0
