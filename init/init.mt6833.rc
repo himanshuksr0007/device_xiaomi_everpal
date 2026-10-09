@@ -959,4 +959,6 @@ on init
 
 on property:sys.boot_completed=1
     restart android-hardware-media-c2-hal-1-2
-    # ZRAM handled by init.everpal.zram.sh
+    swapon_all /vendor/etc/fstab.mt6833
+    # Dynamic ZRAM setup
+    exec -- /system/bin/sh /vendor/etc/init/hw/init.everpal.zram.sh

@@ -1,4 +1,4 @@
-#!/vendor/bin/sh
+#!/system/bin/sh
 # Dynamic ZRAM setup per RAM size
 
 TAG="everpal-zram"
@@ -73,7 +73,7 @@ if [ -b /dev/block/zram0 ]; then
         w /sys/block/zram0/max_comp_streams "$NPROC"
         w /sys/block/zram0/disksize "$ZRAM_SIZE_BYTES"
         mkswap /dev/block/zram0 2>/dev/null
-        swapon /dev/block/zram0 -p 32767 2>/dev/null
+        swapon -p 32767 /dev/block/zram0 2>/dev/null
     else
         kmsg "ZRAM already correct (${CURR_SWAP_KB}kB), keeping"
     fi

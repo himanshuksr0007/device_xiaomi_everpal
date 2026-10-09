@@ -26,8 +26,6 @@ on post-fs-data
     chmod 0660 /sys/devices/platform/flashlights_mt6360/torch_brightness
 
 on property:sys.boot_completed=1
-    # Dynamic ZRAM setup
-    exec -- /vendor/bin/sh /vendor/etc/init/hw/init.everpal.zram.sh
     # Linux 4.14 memory compaction (compaction_proactiveness is 5.8+ only)
     write /proc/sys/vm/stat_interval 10
     write /proc/sys/vm/compact_memory 1
