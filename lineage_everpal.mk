@@ -45,3 +45,6 @@ PRODUCT_MODEL := everpal
 
 # Build info
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
+
+# 4.14 kernel: skip VINTF kernel enforcement
+PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
