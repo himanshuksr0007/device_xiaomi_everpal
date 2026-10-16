@@ -211,6 +211,7 @@ PRODUCT_PACKAGES += \
     init.batterysecret.rc \
     init.connectivity.rc \
     init.everpal.rc \
+    init.everpal.zram.sh \
     init.modem.rc \
     init.mt6833.power.rc \
     init.mt6833.rc \
